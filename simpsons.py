@@ -141,5 +141,8 @@ predictions = model.predict(prepare(img))
 
 # Getting class with the highest probability
 print(characters[np.argmax(predictions[0])])
+<<<<<<< HEAD
 
 model.save('simpsons_classifier.h5')
+=======
+>>>>>>> c0f8356393cf0dd42b306eb133e2f07070df0306
