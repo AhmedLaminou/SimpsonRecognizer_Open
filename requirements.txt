@@ -1,30 +1,30 @@
-# Simpson Character Classifier - Requirements
-# Python 3.11+ recommended
+# Simpson Knower - Requirements
+# Python 3.10+ recommended
+
+# ===== Core Dependencies =====
 
 # Deep Learning Framework
-tensorflow>=2.13.0
-keras>=2.13.0
+tensorflow>=2.13.0,<2.17.0
+protobuf>=3.20.0
 
 # Computer Vision
-opencv-python>=4.8.0
+opencv-python-headless>=4.8.0
 Pillow>=10.0.0
 
 # Numerical Computing
-numpy>=1.24.0
+numpy>=1.24.0,<2.0.0
 
-# Web Framework (for interface.py)
+# Web Framework
 Flask>=2.3.0
+Werkzeug>=2.3.0
 
-# Progress Bars (for notebook)
+# Production Server
+gunicorn>=21.0.0
+
+# ===== Optional Dependencies =====
+
+# Progress Bars
 tqdm>=4.65.0
 
-# Data Visualization (for notebook)
+# Data Visualization
 matplotlib>=3.7.0
-
-# Optional: Jupyter Notebook support
-jupyter>=1.0.0
-notebook>=7.0.0
-ipykernel>=6.25.0
-
-# Optional: For better performance
-# tensorflow-gpu>=2.13.0  # Uncomment if using GPU

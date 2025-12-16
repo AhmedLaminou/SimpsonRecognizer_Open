@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - Simpson Knower</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Springfield Background -->
+    <div class="springfield-bg">
+        <div class="clouds">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+        </div>
+        <div class="springfield-skyline"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="simpsons-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-text">SIMPSON</span>
+                <span class="logo-highlight">KNOWER</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">
+                    <span class="nav-icon">🏠</span> Home
+                </a></li>
+                <li><a href="/characters" class="nav-link">
+                    <span class="nav-icon">👨‍👩‍👧‍👦</span> Characters
+                </a></li>
+                <li><a href="/news" class="nav-link active">
+                    <span class="nav-icon">📺</span> News
+                </a></li>
+                <li><a href="/about" class="nav-link">
+                    <span class="nav-icon">🍩</span> About
+                </a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>📺 Springfield News</h1>
+        <p>All the latest from Springfield and beyond!</p>
+    </header>
+
+    <!-- News Content -->
+    <main class="news-container">
+        <article class="news-item">
+            <span class="news-date">December 2025</span>
+            <h3>🎉 Simpson Knower Launches!</h3>
+            <p>
+                We're excited to announce the launch of Simpson Knower - an AI-powered 
+                character recognition system that can identify your favorite Simpsons characters! 
+                Upload any image and watch our neural network work its magic. Homer approved! 🍩
+            </p>
+        </article>
+
+        <article class="news-item">
+            <span class="news-date">Season 36</span>
+            <h3>📺 The Simpsons Continues Strong!</h3>
+            <p>
+                The Simpsons continues to entertain audiences worldwide with Season 36! 
+                The show remains the longest-running American animated series and sitcom, 
+                proving that Springfield never gets old. New episodes air on FOX!
+            </p>
+        </article>
+
+        <article class="news-item">
+            <span class="news-date">Fun Fact</span>
+            <h3>🎂 35+ Years of Yellow!</h3>
+            <p>
+                Did you know? The Simpsons first appeared as shorts on The Tracey Ullman Show 
+                in 1987, and the first full episode aired on December 17, 1989. That's over 
+                35 years of "D'oh!" moments, Bart's pranks, and Homer's love for Duff beer!
+            </p>
+        </article>
+
+        <article class="news-item">
+            <span class="news-date">AI Update</span>
+            <h3>🧠 Deep Learning Gets Smarter!</h3>
+            <p>
+                Our AI model continues to learn! We've trained it on thousands of Simpsons 
+                images to recognize 10 main characters with high accuracy. Future updates 
+                will include more characters like Apu, Comic Book Guy, and Chief Wiggum!
+            </p>
+        </article>
+
+        <article class="news-item">
+            <span class="news-date">Springfield Gazette</span>
+            <h3>🏆 Top 10 Homer Quotes of All Time</h3>
+            <p>
+                "D'oh!" • "Mmm...donuts" • "Why you little...!" • "Woo-hoo!" • 
+                "To alcohol! The cause of, and solution to, all of life's problems." 
+                • "I am so smart! S-M-R-T!" • "Kids, you tried your best and you failed 
+                miserably. The lesson is, never try."
+            </p>
+        </article>
+
+        <article class="news-item">
+            <span class="news-date">Coming Soon</span>
+            <h3>🚀 Future Features</h3>
+            <p>
+                We're working on exciting new features! Soon you'll be able to identify 
+                even more characters, see fun facts about detected characters, and maybe 
+                even generate your own Simpsons-style avatar. Stay tuned, Springfield fans!
+            </p>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="simpsons-footer">
+        <div class="footer-content">
+            <div class="footer-logo">SIMPSON KNOWER</div>
+            <p>Powered by TensorFlow & Deep Learning</p>
+            <p class="footer-quote">"I'm not a nerd, Bart. Nerds are smart." - Milhouse</p>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/characters">Characters</a>
+                <a href="/news">News</a>
+                <a href="/about">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

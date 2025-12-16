@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Simpson Knower</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Springfield Background -->
+    <div class="springfield-bg">
+        <div class="clouds">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+        </div>
+        <div class="springfield-skyline"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="simpsons-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-text">SIMPSON</span>
+                <span class="logo-highlight">KNOWER</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">
+                    <span class="nav-icon">🏠</span> Home
+                </a></li>
+                <li><a href="/characters" class="nav-link">
+                    <span class="nav-icon">👨‍👩‍👧‍👦</span> Characters
+                </a></li>
+                <li><a href="/news" class="nav-link">
+                    <span class="nav-icon">📺</span> News
+                </a></li>
+                <li><a href="/about" class="nav-link active">
+                    <span class="nav-icon">🍩</span> About
+                </a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>🍩 About Simpson Knower</h1>
+        <p>The story behind Springfield's smartest AI!</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="about-content">
+        <div class="simpsons-card">
+            <div class="about-section">
+                <h2>🎯 What is Simpson Knower?</h2>
+                <p>
+                    Simpson Knower is an AI-powered character recognition system that can identify 
+                    your favorite characters from The Simpsons! Simply upload an image, and our 
+                    deep learning model will tell you which character it is. It's like having 
+                    Professor Frink's brain in your browser!
+                </p>
+            </div>
+
+            <div class="about-section">
+                <h2>🧠 How Does It Work?</h2>
+                <p>
+                    Our AI model was trained using a Convolutional Neural Network (CNN) on thousands 
+                    of images of Simpsons characters. The model learned to recognize distinctive features 
+                    like Homer's bald head, Marge's blue hair, Bart's spiky hair, and Lisa's pearls. 
+                    When you upload an image, the model analyzes it and predicts which character it sees!
+                </p>
+            </div>
+
+            <div class="about-section">
+                <h2>🔧 Technology Stack</h2>
+                <p>Built with love and donuts using these technologies:</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">🐍 Python</span>
+                    <span class="tech-badge">🧪 TensorFlow</span>
+                    <span class="tech-badge">🔬 Keras</span>
+                    <span class="tech-badge">🌶️ Flask</span>
+                    <span class="tech-badge">🎨 HTML/CSS/JS</span>
+                    <span class="tech-badge">📊 NumPy</span>
+                    <span class="tech-badge">🖼️ OpenCV</span>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>📚 Characters We Can Identify</h2>
+                <p>
+                    Our model can recognize 10 iconic Simpsons characters: Homer Simpson, 
+                    Bart Simpson, Marge Simpson, Lisa Simpson, Maggie Simpson, Ned Flanders, 
+                    Mr. Burns, Moe Szyslak, Krusty the Clown, and Principal Skinner. 
+                    More characters coming soon!
+                </p>
+            </div>
+
+            <div class="about-section">
+                <h2>💡 Fun Facts</h2>
+                <p>
+                    Did you know? The Simpsons is the longest-running American animated program 
+                    and the longest-running American sitcom. It first aired on December 17, 1989, 
+                    and has been entertaining families for over 30 years! D'oh!
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="simpsons-footer">
+        <div class="footer-content">
+            <div class="footer-logo">SIMPSON KNOWER</div>
+            <p>Powered by TensorFlow & Deep Learning</p>
+            <p class="footer-quote">"Trying is the first step towards failure." - Homer Simpson</p>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/characters">Characters</a>
+                <a href="/news">News</a>
+                <a href="/about">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

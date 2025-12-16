@@ -1,6 +1,6 @@
 // ===================================
-// SIMPSONS CHARACTER CLASSIFIER
-// Interactive JavaScript Module
+// SIMPSON KNOWER - Character Classifier
+// Springfield's Smartest AI!
 // ===================================
 
 // ===== DOM ELEMENTS =====
@@ -15,121 +15,68 @@ const resultsSection = document.getElementById('resultsSection');
 const errorContainer = document.getElementById('errorContainer');
 const tryAgainBtn = document.getElementById('tryAgainBtn');
 const dismissErrorBtn = document.getElementById('dismissErrorBtn');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.querySelector('.nav-links');
 
 // State
 let currentFile = null;
 
-// ===== PARTICLE ANIMATION =====
-class ParticleSystem {
-    constructor() {
-        this.canvas = document.getElementById('particleCanvas');
-        this.ctx = this.canvas.getContext('2d');
-        this.particles = [];
-        this.particleCount = 80;
-        this.connectionDistance = 150;
-        
-        this.resize();
-        this.init();
-        this.animate();
-        
-        window.addEventListener('resize', () => this.resize());
-    }
-    
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-    }
-    
-    init() {
-        this.particles = [];
-        for (let i = 0; i < this.particleCount; i++) {
-            this.particles.push({
-                x: Math.random() * this.canvas.width,
-                y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                radius: Math.random() * 2 + 1
-            });
-        }
-    }
-    
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
-        // Update and draw particles
-        this.particles.forEach((particle, i) => {
-            // Update position
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-            
-            // Bounce off edges
-            if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
-            if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
-            
-            // Draw particle
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            this.ctx.fillStyle = 'rgba(0, 212, 255, 0.6)';
-            this.ctx.fill();
-            
-            // Draw connections
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const other = this.particles[j];
-                const dx = particle.x - other.x;
-                const dy = particle.y - other.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < this.connectionDistance) {
-                    const opacity = (1 - distance / this.connectionDistance) * 0.3;
-                    this.ctx.beginPath();
-                    this.ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-                    this.ctx.lineWidth = 1;
-                    this.ctx.moveTo(particle.x, particle.y);
-                    this.ctx.lineTo(other.x, other.y);
-                    this.ctx.stroke();
-                }
-            }
-        });
-        
-        requestAnimationFrame(() => this.animate());
-    }
+// ===== MOBILE MENU =====
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
 }
 
-// Initialize particle system
-const particleSystem = new ParticleSystem();
+// ===== CHARACTER EMOJIS =====
+const characterEmojis = {
+    'homer_simpson': '👨‍🦲',
+    'bart_simpson': '👦',
+    'marge_simpson': '👩',
+    'lisa_simpson': '👧',
+    'maggie_simpson': '👶',
+    'ned_flanders': '🧔',
+    'charles_montgomery_burns': '👴',
+    'moe_szyslak': '🍺',
+    'krusty_the_clown': '🤡',
+    'principal_skinner': '👨‍🏫'
+};
 
 // ===== FILE UPLOAD HANDLERS =====
-uploadArea.addEventListener('click', () => {
-    fileInput.click();
-});
+// Only attach events if we're on the main page with upload area
+if (uploadArea && fileInput) {
+    uploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
 
-uploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    uploadArea.classList.add('dragover');
-});
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+    });
 
-uploadArea.addEventListener('dragleave', () => {
-    uploadArea.classList.remove('dragover');
-});
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+    });
 
-uploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    uploadArea.classList.remove('dragover');
-    
-    const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith('image/')) {
-        handleFile(file);
-    } else {
-        showError('Please upload a valid image file (JPG, PNG, GIF)');
-    }
-});
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) {
+            handleFile(file);
+        } else {
+            showError('Please upload a valid image file (JPG, PNG, GIF)');
+        }
+    });
 
-fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        handleFile(file);
-    }
-});
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            handleFile(file);
+        }
+    });
+}
 
 // ===== FILE HANDLING =====
 function handleFile(file) {
@@ -154,22 +101,25 @@ function handleFile(file) {
 }
 
 // Remove image
-removeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    resetUpload();
-});
+if (removeBtn) {
+    removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        resetUpload();
+    });
+}
 
 function resetUpload() {
-    fileInput.value = '';
+    if (fileInput) fileInput.value = '';
     currentFile = null;
-    imagePreview.src = '';
-    previewContainer.classList.remove('active');
-    predictBtn.classList.remove('active');
+    if (imagePreview) imagePreview.src = '';
+    if (previewContainer) previewContainer.classList.remove('active');
+    if (predictBtn) predictBtn.classList.remove('active');
     hideResults();
     hideError();
 }
 
 // ===== PREDICTION =====
+if (predictBtn) {
 predictBtn.addEventListener('click', async () => {
     if (!currentFile) return;
     
@@ -210,12 +160,19 @@ predictBtn.addEventListener('click', async () => {
         predictBtn.disabled = false;
     }
 });
+}
 
 // ===== DISPLAY RESULTS =====
 function displayResults(data) {
     // Character name
     const characterName = document.getElementById('characterName');
     characterName.textContent = data.character.replace(/_/g, ' ');
+    
+    // Character emoji icon
+    const characterIcon = document.getElementById('characterIcon');
+    if (characterIcon) {
+        characterIcon.textContent = characterEmojis[data.character] || '👤';
+    }
     
     // Confidence
     const confidenceValue = document.getElementById('confidenceValue');
@@ -243,10 +200,11 @@ function displayResults(data) {
         });
     
     sortedPredictions.forEach(([char, conf]) => {
+        const emoji = characterEmojis[char] || '👤';
         const item = document.createElement('div');
         item.className = 'prediction-item';
         item.innerHTML = `
-            <span class="char-name">${char.replace(/_/g, ' ')}</span>
+            <span class="char-name">${emoji} ${char.replace(/_/g, ' ')}</span>
             <span class="char-confidence">${conf}</span>
         `;
         predictionsList.appendChild(item);
@@ -258,64 +216,70 @@ function displayResults(data) {
 
 // ===== UI STATE MANAGEMENT =====
 function showLoading() {
-    loadingContainer.classList.add('active');
+    if (loadingContainer) loadingContainer.classList.add('active');
 }
 
 function hideLoading() {
-    loadingContainer.classList.remove('active');
+    if (loadingContainer) loadingContainer.classList.remove('active');
 }
 
 function showResults() {
-    resultsSection.classList.add('active');
-    
-    // Scroll to results
-    setTimeout(() => {
-        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 100);
+    if (resultsSection) {
+        resultsSection.classList.add('active');
+        // Scroll to results
+        setTimeout(() => {
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
 }
 
 function hideResults() {
-    resultsSection.classList.remove('active');
+    if (resultsSection) resultsSection.classList.remove('active');
 }
 
 function showError(message) {
     const errorMessage = document.getElementById('errorMessage');
-    errorMessage.textContent = message;
-    errorContainer.classList.add('active');
-    
-    // Scroll to error
-    setTimeout(() => {
-        errorContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 100);
+    if (errorMessage) errorMessage.textContent = message;
+    if (errorContainer) {
+        errorContainer.classList.add('active');
+        // Scroll to error
+        setTimeout(() => {
+            errorContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
 }
 
 function hideError() {
-    errorContainer.classList.remove('active');
+    if (errorContainer) errorContainer.classList.remove('active');
 }
 
 // ===== ACTION BUTTONS =====
-tryAgainBtn.addEventListener('click', () => {
-    resetUpload();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+if (tryAgainBtn) {
+    tryAgainBtn.addEventListener('click', () => {
+        resetUpload();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
 
-dismissErrorBtn.addEventListener('click', () => {
-    hideError();
-});
+if (dismissErrorBtn) {
+    dismissErrorBtn.addEventListener('click', () => {
+        hideError();
+    });
+}
 
 // ===== KEYBOARD SHORTCUTS =====
 document.addEventListener('keydown', (e) => {
     // Escape key to reset
     if (e.key === 'Escape') {
-        if (resultsSection.classList.contains('active')) {
+        if (resultsSection && resultsSection.classList.contains('active')) {
             resetUpload();
-        } else if (errorContainer.classList.contains('active')) {
+        } else if (errorContainer && errorContainer.classList.contains('active')) {
             hideError();
         }
     }
     
     // Enter key to predict (if image is loaded)
-    if (e.key === 'Enter' && currentFile && !predictBtn.disabled) {
+    if (e.key === 'Enter' && currentFile && predictBtn && !predictBtn.disabled) {
         predictBtn.click();
     }
 });
@@ -329,6 +293,7 @@ function formatCharacterName(name) {
 }
 
 // ===== INITIALIZATION =====
-console.log('🎭 Simpsons Character Classifier initialized');
-console.log('✨ Particle system active');
-console.log('📸 Ready to analyze images');
+console.log('🍩 Simpson Knower initialized!');
+console.log('🎭 Springfield\'s smartest AI is ready!');
+console.log('📸 Upload an image to identify a character');
+console.log('D\'oh! - Homer Simpson');

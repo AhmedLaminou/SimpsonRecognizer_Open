@@ -1,30 +1,42 @@
-
+/* ===== SIMPSONS THEME CSS ===== */
 
 /* ===== CSS VARIABLES ===== */
 :root {
-  /* Colors */
-  --primary: #00d4ff;
-  --primary-dark: #0099cc;
-  --secondary: #ff00ff;
-  --accent: #ffed4e;
-  --success: #00ff88;
-  --error: #ff3366;
+  /* Simpsons Colors */
+  --simpsons-yellow: #ffd521;
+  --simpsons-yellow-light: #ffeb3b;
+  --simpsons-yellow-dark: #f5c400;
+  --simpsons-blue: #009edb;
+  --simpsons-blue-dark: #0077a8;
+  --simpsons-orange: #ff6b35;
+  --simpsons-brown: #8b4513;
+  --simpsons-pink: #ff69b4;
+  --simpsons-green: #7cb342;
+  --simpsons-red: #e53935;
+  
+  /* Sky Colors */
+  --sky-top: #87ceeb;
+  --sky-bottom: #b0e0e6;
+  --cloud-white: #ffffff;
+  
+  /* UI Colors */
+  --primary: var(--simpsons-yellow);
+  --primary-dark: var(--simpsons-yellow-dark);
+  --secondary: var(--simpsons-blue);
+  --accent: var(--simpsons-orange);
+  --success: var(--simpsons-green);
+  --error: var(--simpsons-red);
 
   /* Backgrounds */
-  --bg-dark: #0a0e27;
-  --bg-darker: #050814;
-  --bg-card: rgba(255, 255, 255, 0.05);
-  --bg-card-hover: rgba(255, 255, 255, 0.08);
-
-  /* Glass Effect */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --bg-main: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 100%);
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card-hover: rgba(255, 255, 255, 1);
 
   /* Text */
-  --text-primary: #ffffff;
-  --text-secondary: #b4b4b4;
-  --text-muted: #6b6b6b;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a5a;
+  --text-muted: #7a7a8a;
+  --text-light: #ffffff;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -38,6 +50,12 @@
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-cartoon: 4px 4px 0px rgba(0, 0, 0, 0.3);
 
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -57,9 +75,8 @@ html {
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background: var(--bg-darker);
+  font-family: "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+  background: var(--bg-main);
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
@@ -68,149 +85,347 @@ body {
 
 /* ===== CUSTOM SCROLLBAR ===== */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-darker);
+  background: var(--simpsons-blue);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  background: var(--simpsons-yellow);
   border-radius: 10px;
+  border: 2px solid var(--simpsons-blue);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--primary-dark), var(--secondary));
+  background: var(--simpsons-yellow-dark);
 }
 
-/* ===== ANIMATED BACKGROUND ===== */
-.background {
+/* ===== SPRINGFIELD BACKGROUND ===== */
+.springfield-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
+  background: linear-gradient(180deg, #87CEEB 0%, #98D8E8 50%, #B0E0E6 100%);
   overflow: hidden;
 }
 
-#particleCanvas {
+.clouds {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
 }
 
-.gradient-overlay {
+.cloud {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-      circle at 20% 50%,
-      rgba(0, 212, 255, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(255, 0, 255, 0.1) 0%,
-      transparent 50%
-    );
-  pointer-events: none;
+  background: white;
+  border-radius: 50%;
+  filter: blur(1px);
 }
 
-/* ===== CONTAINER ===== */
-.container {
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloud-1 {
+  width: 100px;
+  height: 40px;
+  top: 10%;
+  left: 10%;
+  animation: floatCloud 20s linear infinite;
+}
+
+.cloud-1::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 10px;
+}
+
+.cloud-1::after {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 40px;
+}
+
+.cloud-2 {
+  width: 120px;
+  height: 50px;
+  top: 20%;
+  left: 60%;
+  animation: floatCloud 25s linear infinite reverse;
+}
+
+.cloud-2::before {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 15px;
+}
+
+.cloud-2::after {
+  width: 70px;
+  height: 70px;
+  top: -35px;
+  left: 50px;
+}
+
+.cloud-3 {
+  width: 80px;
+  height: 35px;
+  top: 5%;
+  left: 40%;
+  animation: floatCloud 18s linear infinite;
+}
+
+.cloud-3::before {
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: 10px;
+}
+
+.cloud-3::after {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 35px;
+}
+
+@keyframes floatCloud {
+  0% { transform: translateX(-150px); }
+  100% { transform: translateX(calc(100vw + 150px)); }
+}
+
+.springfield-skyline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 150'%3E%3Cpath fill='%234a7c4e' d='M0,150 L0,100 Q50,80 100,100 Q150,60 200,90 Q250,70 300,100 Q350,50 400,80 Q450,90 500,70 Q550,100 600,85 Q650,60 700,90 Q750,80 800,100 Q850,70 900,90 Q950,85 1000,100 Q1050,75 1100,95 Q1150,80 1200,100 L1200,150 Z'/%3E%3C/svg%3E") repeat-x;
+  background-size: cover;
+}
+
+/* ===== NAVIGATION ===== */
+.simpsons-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--simpsons-yellow);
+  border-bottom: 4px solid var(--simpsons-brown);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nav-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--spacing-lg);
-  position: relative;
-  z-index: 1;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
 }
 
-/* ===== GLASS CARD ===== */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
+.nav-logo {
+  text-decoration: none;
+  display: flex;
+  gap: 8px;
+}
+
+.logo-text {
+  font-family: "Bangers", cursive;
+  font-size: 1.8rem;
+  color: var(--simpsons-blue);
+  text-shadow: 2px 2px 0 var(--text-primary);
+}
+
+.logo-highlight {
+  font-family: "Bangers", cursive;
+  font-size: 1.8rem;
+  color: var(--simpsons-orange);
+  text-shadow: 2px 2px 0 var(--text-primary);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-xs);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  border: 3px solid transparent;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: var(--simpsons-brown);
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background: var(--simpsons-blue);
+  color: white;
+  border-color: var(--simpsons-blue-dark);
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+}
+
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: var(--transition-fast);
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+  padding: var(--spacing-xl) var(--spacing-lg);
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.main-title {
+  font-family: "Bangers", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+.title-the {
+  font-size: 2rem;
+  color: var(--simpsons-blue);
+  text-shadow: 2px 2px 0 white;
+  letter-spacing: 8px;
+}
+
+.title-simpsons {
+  font-size: 5rem;
+  color: var(--simpsons-yellow);
+  text-shadow: 
+    4px 4px 0 var(--simpsons-brown),
+    -2px -2px 0 var(--simpsons-brown),
+    2px -2px 0 var(--simpsons-brown),
+    -2px 2px 0 var(--simpsons-brown);
+  letter-spacing: 4px;
+  animation: wobble 3s ease-in-out infinite;
+}
+
+.title-ai {
+  font-size: 2.5rem;
+  color: var(--simpsons-orange);
+  text-shadow: 2px 2px 0 var(--text-primary);
+}
+
+.hero-subtitle {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.8);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  display: inline-block;
+  border: 3px solid var(--simpsons-brown);
+}
+
+.homer-donut {
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 6rem;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+@keyframes spin {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* ===== MAIN CONTAINER ===== */
+.main-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* ===== SIMPSONS CARD ===== */
+.simpsons-card {
+  background: var(--bg-card);
+  border: 4px solid var(--simpsons-brown);
   border-radius: var(--radius-lg);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--shadow-cartoon);
   padding: var(--spacing-lg);
   transition: all var(--transition-normal);
 }
 
-.glass-card:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
+.simpsons-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== HEADER ===== */
-.header {
+.card-header {
   text-align: center;
-  margin-bottom: var(--spacing-xl);
-  animation: fadeInDown 0.8s ease;
+  margin-bottom: var(--spacing-lg);
 }
 
-.logo-container {
-  position: relative;
-  display: inline-block;
+.card-header h2 {
+  font-family: "Bangers", cursive;
+  font-size: 2rem;
+  color: var(--simpsons-blue);
+  margin-bottom: var(--spacing-xs);
 }
 
-.logo-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-  opacity: 0.3;
-  filter: blur(40px);
-  animation: pulse 3s ease-in-out infinite;
-}
-
-.title {
-  font-family: "Orbitron", sans-serif;
-  font-size: 4rem;
-  font-weight: 900;
-  margin-bottom: var(--spacing-sm);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-md);
-}
-
-.title-icon {
-  font-size: 3.5rem;
-  animation: rotate 4s linear infinite;
-}
-
-.title-text {
-  background: linear-gradient(
-    135deg,
-    var(--primary),
-    var(--secondary),
-    var(--accent)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 3s ease infinite;
-  background-size: 200% 200%;
-}
-
-.subtitle {
-  font-size: 1.2rem;
+.card-header p {
   color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 /* ===== UPLOAD SECTION ===== */
@@ -224,82 +439,69 @@ body {
 }
 
 .upload-area {
-  border: 2px dashed var(--glass-border);
-  border-radius: var(--radius-md);
+  border: 4px dashed var(--simpsons-blue);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   cursor: pointer;
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
-}
-
-.upload-area::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 212, 255, 0.1),
-    transparent
-  );
-  transition: left 0.5s;
-}
-
-.upload-area:hover::before {
-  left: 100%;
+  background: linear-gradient(135deg, rgba(255, 213, 33, 0.1) 0%, rgba(0, 158, 219, 0.1) 100%);
 }
 
 .upload-area:hover {
-  border-color: var(--primary);
-  background: rgba(0, 212, 255, 0.05);
+  border-color: var(--simpsons-orange);
+  background: linear-gradient(135deg, rgba(255, 213, 33, 0.2) 0%, rgba(0, 158, 219, 0.2) 100%);
   transform: scale(1.02);
 }
 
 .upload-area.dragover {
-  border-color: var(--secondary);
-  background: rgba(255, 0, 255, 0.1);
+  border-color: var(--simpsons-green);
+  background: rgba(124, 179, 66, 0.2);
   transform: scale(1.05);
 }
 
-.upload-icon-container {
-  margin-bottom: var(--spacing-md);
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .upload-icon {
-  width: 80px;
-  height: 80px;
-  color: var(--primary);
-  stroke-width: 1.5;
-  animation: float 3s ease-in-out infinite;
+  font-size: 4rem;
+  animation: bounce 2s ease-in-out infinite;
 }
 
-.upload-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-primary);
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-.upload-text {
-  font-size: 1.1rem;
+.upload-content h3 {
+  font-family: "Bangers", cursive;
+  font-size: 1.6rem;
+  color: var(--simpsons-blue);
+}
+
+.upload-content p {
   color: var(--text-secondary);
-  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
 }
 
-.upload-hint {
-  font-size: 0.9rem;
+.upload-formats {
+  font-size: 0.85rem;
   color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
 }
 
 /* ===== IMAGE PREVIEW ===== */
 .preview-container {
   display: none;
   margin: var(--spacing-lg) 0;
-  animation: fadeIn var(--transition-normal);
+  animation: zoomIn 0.5s ease;
 }
 
 .preview-container.active {
@@ -314,48 +516,47 @@ body {
 
 #imagePreview {
   max-width: 100%;
-  max-height: 500px;
+  max-height: 400px;
   border-radius: var(--radius-md);
-  box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
-  border: 2px solid var(--primary);
-  animation: zoomIn 0.5s ease;
+  box-shadow: var(--shadow-cartoon);
+  border: 4px solid var(--simpsons-yellow);
 }
 
 .remove-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255, 51, 102, 0.9);
-  border: none;
+  top: -10px;
+  right: -10px;
+  background: var(--simpsons-red);
+  border: 3px solid white;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--transition-fast);
-}
-
-.remove-btn svg {
-  width: 20px;
-  height: 20px;
+  font-size: 1.2rem;
   color: white;
+  font-weight: bold;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 
 .remove-btn:hover {
-  background: var(--error);
-  transform: rotate(90deg) scale(1.1);
+  background: #c62828;
+  transform: scale(1.1) rotate(90deg);
 }
 
 /* ===== BUTTONS ===== */
+.analyze-btn,
 .predict-btn {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: var(--simpsons-orange);
   color: white;
-  border: none;
-  padding: 1rem 3rem;
-  font-size: 1.2rem;
-  font-weight: 700;
+  border: 4px solid var(--simpsons-brown);
+  padding: 1rem 2.5rem;
+  font-family: "Bangers", cursive;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
   border-radius: var(--radius-xl);
   cursor: pointer;
   display: none;
@@ -363,84 +564,62 @@ body {
   gap: var(--spacing-sm);
   margin: var(--spacing-lg) auto 0;
   transition: all var(--transition-normal);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+  box-shadow: var(--shadow-cartoon);
 }
 
+.analyze-btn.active,
 .predict-btn.active {
   display: inline-flex;
   animation: slideInUp 0.5s ease;
 }
 
-.predict-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: left 0.5s;
-}
-
-.predict-btn:hover::before {
-  left: 100%;
-}
-
+.analyze-btn:hover,
 .predict-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.6);
+  background: var(--simpsons-red);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
 }
 
+.analyze-btn:active,
 .predict-btn:active {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
+.analyze-btn:disabled,
 .predict-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
 .btn-icon {
-  font-size: 1.5rem;
-  transition: transform var(--transition-fast);
+  font-size: 1.4rem;
 }
 
-.predict-btn:hover .btn-icon {
-  transform: translateX(5px);
+.btn-text {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
 .secondary-btn {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  color: var(--text-primary);
-  border: 1px solid var(--glass-border);
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
+  background: var(--simpsons-blue);
+  color: white;
+  border: 3px solid var(--simpsons-blue-dark);
+  padding: 0.8rem 1.5rem;
+  font-family: "Bangers", cursive;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
   border-radius: var(--radius-lg);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   transition: all var(--transition-normal);
-}
-
-.secondary-btn svg {
-  width: 20px;
-  height: 20px;
+  box-shadow: var(--shadow-sm);
 }
 
 .secondary-btn:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--primary);
+  background: var(--simpsons-blue-dark);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 /* ===== LOADING ===== */
@@ -459,62 +638,49 @@ body {
   padding: var(--spacing-xl);
 }
 
-.spinner-container {
+.donut-spinner {
   margin-bottom: var(--spacing-lg);
 }
 
-.spinner {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
+.donut {
+  font-size: 5rem;
+  animation: spinDonut 2s linear infinite;
+  display: inline-block;
 }
 
-.spinner-ring {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 3px solid transparent;
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 1.5s linear infinite;
-}
-
-.spinner-ring:nth-child(2) {
-  border-top-color: var(--secondary);
-  animation-duration: 2s;
-  animation-direction: reverse;
-}
-
-.spinner-ring:nth-child(3) {
-  border-top-color: var(--accent);
-  animation-duration: 2.5s;
+@keyframes spinDonut {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
 }
 
 .loading-text {
-  font-size: 1.3rem;
-  color: var(--text-secondary);
+  font-family: "Bangers", cursive;
+  font-size: 1.4rem;
+  color: var(--simpsons-blue);
   margin-bottom: var(--spacing-md);
 }
 
 .loading-bar {
   width: 100%;
-  height: 4px;
-  background: var(--bg-card);
-  border-radius: 2px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
   overflow: hidden;
+  border: 2px solid var(--simpsons-brown);
 }
 
 .loading-progress {
   height: 100%;
   background: linear-gradient(
     90deg,
-    var(--primary),
-    var(--secondary),
-    var(--accent)
+    var(--simpsons-yellow),
+    var(--simpsons-orange),
+    var(--simpsons-pink)
   );
   background-size: 200% 100%;
-  animation: loadingProgress 2s ease-in-out infinite;
+  animation: loadingProgress 1.5s ease-in-out infinite;
+  border-radius: 4px;
 }
 
 /* ===== RESULTS ===== */
@@ -537,31 +703,25 @@ body {
   align-items: center;
   margin-bottom: var(--spacing-lg);
   padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 3px dashed var(--simpsons-yellow);
 }
 
-.result-title {
+.result-header h2 {
+  font-family: "Bangers", cursive;
   font-size: 1.8rem;
-  font-weight: 700;
+  color: var(--simpsons-blue);
 }
 
 .result-badge {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  background: rgba(0, 255, 136, 0.2);
+  background: var(--simpsons-green);
+  color: white;
   padding: 0.5rem 1rem;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--success);
-}
-
-.badge-icon {
-  font-size: 1.2rem;
-}
-
-.badge-text {
-  font-weight: 600;
-  color: var(--success);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  font-weight: 700;
 }
 
 /* ===== MAIN RESULT ===== */
@@ -569,56 +729,56 @@ body {
   text-align: center;
   margin-bottom: var(--spacing-xl);
   padding: var(--spacing-lg);
-  background: var(--bg-card);
+  background: linear-gradient(135deg, rgba(255, 213, 33, 0.2) 0%, rgba(0, 158, 219, 0.2) 100%);
   border-radius: var(--radius-md);
+  border: 3px solid var(--simpsons-yellow);
 }
 
-.character-avatar {
+.character-frame {
   position: relative;
   width: 120px;
   height: 120px;
   margin: 0 auto var(--spacing-md);
 }
 
-.avatar-glow {
+.frame-glow {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, var(--simpsons-yellow) 0%, transparent 70%);
   opacity: 0.5;
   filter: blur(20px);
   animation: pulse 2s ease-in-out infinite;
 }
 
-.avatar-icon {
+.character-icon {
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: var(--simpsons-yellow);
+  border: 4px solid var(--simpsons-brown);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
-  animation: zoomIn 0.5s ease;
+  font-size: 3.5rem;
+  box-shadow: var(--shadow-cartoon);
 }
 
 .character-name {
+  font-family: "Bangers", cursive;
   font-size: 2.5rem;
-  font-weight: 700;
   margin-bottom: var(--spacing-md);
   text-transform: capitalize;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--simpsons-orange);
+  text-shadow: 2px 2px 0 var(--simpsons-brown);
   animation: slideInUp 0.5s ease 0.1s both;
 }
 
-.confidence-container {
+.confidence-section {
   animation: slideInUp 0.5s ease 0.2s both;
 }
 
@@ -626,46 +786,46 @@ body {
   font-size: 1rem;
   color: var(--text-secondary);
   margin-bottom: var(--spacing-xs);
+  font-weight: 600;
 }
 
 .confidence-value {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--success);
+  font-family: "Bangers", cursive;
+  font-size: 2.5rem;
+  color: var(--simpsons-green);
   margin-bottom: var(--spacing-sm);
 }
 
 .confidence-bar {
   width: 100%;
   max-width: 400px;
-  height: 12px;
-  background: var(--bg-card);
-  border-radius: 6px;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   overflow: hidden;
   margin: 0 auto;
-  border: 1px solid var(--glass-border);
+  border: 3px solid var(--simpsons-brown);
 }
 
 .confidence-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--success), var(--primary));
-  border-radius: 6px;
+  background: linear-gradient(90deg, var(--simpsons-green), var(--simpsons-yellow));
+  border-radius: 4px;
   transition: width 1s ease;
-  box-shadow: 0 0 10px var(--success);
 }
 
 /* ===== PREDICTIONS LIST ===== */
-.predictions-container {
+.predictions-section {
   margin-top: var(--spacing-xl);
   padding-top: var(--spacing-lg);
-  border-top: 1px solid var(--glass-border);
+  border-top: 3px dashed var(--simpsons-blue);
 }
 
-.predictions-title {
-  font-size: 1.3rem;
-  font-weight: 600;
+.predictions-section h4 {
+  font-family: "Bangers", cursive;
+  font-size: 1.4rem;
+  color: var(--simpsons-blue);
   margin-bottom: var(--spacing-md);
-  color: var(--text-secondary);
 }
 
 .predictions-list {
@@ -678,44 +838,35 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md);
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid var(--simpsons-brown);
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
   animation: slideInLeft 0.3s ease both;
 }
 
-.prediction-item:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.prediction-item:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.prediction-item:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.prediction-item:nth-child(4) {
-  animation-delay: 0.25s;
-}
-.prediction-item:nth-child(5) {
-  animation-delay: 0.3s;
-}
+.prediction-item:nth-child(1) { animation-delay: 0.1s; }
+.prediction-item:nth-child(2) { animation-delay: 0.15s; }
+.prediction-item:nth-child(3) { animation-delay: 0.2s; }
+.prediction-item:nth-child(4) { animation-delay: 0.25s; }
+.prediction-item:nth-child(5) { animation-delay: 0.3s; }
 
 .prediction-item:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--primary);
-  transform: translateX(5px);
+  background: var(--simpsons-yellow-light);
+  transform: translateX(8px);
+  box-shadow: var(--shadow-sm);
 }
 
 .char-name {
-  font-weight: 600;
+  font-weight: 700;
   text-transform: capitalize;
   color: var(--text-primary);
 }
 
 .char-confidence {
-  font-weight: 700;
-  color: var(--primary);
+  font-family: "Bangers", cursive;
+  font-size: 1.1rem;
+  color: var(--simpsons-blue);
 }
 
 /* ===== RESULT ACTIONS ===== */
@@ -738,8 +889,8 @@ body {
 .error-card {
   text-align: center;
   padding: var(--spacing-xl);
-  border: 1px solid var(--error);
-  background: rgba(255, 51, 102, 0.1);
+  border-color: var(--simpsons-red);
+  background: rgba(229, 57, 53, 0.1);
 }
 
 .error-icon {
@@ -747,24 +898,63 @@ body {
   margin-bottom: var(--spacing-md);
 }
 
-.error-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--error);
+.error-card h3 {
+  font-family: "Bangers", cursive;
+  font-size: 1.8rem;
+  color: var(--simpsons-red);
   margin-bottom: var(--spacing-sm);
 }
 
 .error-message {
   color: var(--text-secondary);
   margin-bottom: var(--spacing-lg);
+  font-weight: 600;
 }
 
-/* ===== FOOTER ===== */
-.footer {
+/* ===== SIMPSONS FOOTER ===== */
+.simpsons-footer {
+  background: var(--simpsons-blue);
+  color: white;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  border-top: 6px solid var(--simpsons-yellow);
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
   text-align: center;
-  padding: var(--spacing-lg);
-  color: var(--text-muted);
-  font-size: 0.9rem;
+}
+
+.footer-logo {
+  font-family: "Bangers", cursive;
+  font-size: 2rem;
+  color: var(--simpsons-yellow);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-quote {
+  font-style: italic;
+  opacity: 0.9;
+  margin: var(--spacing-sm) 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--simpsons-yellow);
 }
 
 /* ===== ANIMATIONS ===== */
@@ -906,24 +1096,203 @@ body {
   }
 }
 
+/* ===== PAGE STYLES ===== */
+.page-header {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.page-header h1 {
+  font-family: "Bangers", cursive;
+  font-size: 3rem;
+  color: var(--simpsons-yellow);
+  text-shadow: 
+    3px 3px 0 var(--simpsons-brown),
+    -1px -1px 0 var(--simpsons-brown),
+    1px -1px 0 var(--simpsons-brown),
+    -1px 1px 0 var(--simpsons-brown);
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-header p {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.8);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  display: inline-block;
+}
+
+/* Characters Page */
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.character-card {
+  background: var(--bg-card);
+  border: 4px solid var(--simpsons-brown);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-cartoon);
+}
+
+.character-card:hover {
+  transform: translateY(-8px) rotate(1deg);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+}
+
+.character-card .char-emoji {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.character-card h3 {
+  font-family: "Bangers", cursive;
+  font-size: 1.4rem;
+  color: var(--simpsons-blue);
+  margin-bottom: var(--spacing-xs);
+}
+
+.character-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* About Page */
+.about-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.about-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.about-section h2 {
+  font-family: "Bangers", cursive;
+  font-size: 2rem;
+  color: var(--simpsons-orange);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.tech-badge {
+  background: var(--simpsons-yellow);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  border: 2px solid var(--simpsons-brown);
+}
+
+/* News Page */
+.news-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.news-item {
+  background: var(--bg-card);
+  border: 4px solid var(--simpsons-brown);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-cartoon);
+  transition: all var(--transition-normal);
+}
+
+.news-item:hover {
+  transform: translateX(8px);
+}
+
+.news-date {
+  background: var(--simpsons-blue);
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.news-item h3 {
+  font-family: "Bangers", cursive;
+  font-size: 1.5rem;
+  color: var(--simpsons-orange);
+  margin-bottom: var(--spacing-sm);
+}
+
+.news-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
-  .title {
-    font-size: 2.5rem;
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--simpsons-yellow);
     flex-direction: column;
-    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    border-bottom: 4px solid var(--simpsons-brown);
   }
 
-  .title-icon {
-    font-size: 2rem;
+  .nav-links.active {
+    display: flex;
   }
 
-  .subtitle {
-    font-size: 0.9rem;
-    letter-spacing: 2px;
+  .mobile-menu-btn {
+    display: flex;
   }
 
-  .glass-card {
+  .title-simpsons {
+    font-size: 3rem;
+  }
+
+  .title-the,
+  .title-ai {
+    font-size: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    padding: var(--spacing-sm);
+  }
+
+  .homer-donut {
+    display: none;
+  }
+
+  .simpsons-card {
     padding: var(--spacing-md);
   }
 
@@ -932,12 +1301,7 @@ body {
   }
 
   .upload-icon {
-    width: 60px;
-    height: 60px;
-  }
-
-  .upload-title {
-    font-size: 1.3rem;
+    font-size: 3rem;
   }
 
   .character-name {
@@ -945,7 +1309,7 @@ body {
   }
 
   .confidence-value {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 
   .result-header {
@@ -953,19 +1317,43 @@ body {
     gap: var(--spacing-sm);
     text-align: center;
   }
+
+  .footer-links {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .characters-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .page-header h1 {
+    font-size: 2.2rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .container {
+  .main-container {
     padding: var(--spacing-sm);
   }
 
-  .title {
-    font-size: 2rem;
+  .title-simpsons {
+    font-size: 2.5rem;
   }
 
+  .analyze-btn,
   .predict-btn {
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .nav-logo {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .logo-text,
+  .logo-highlight {
+    font-size: 1.4rem;
   }
 }

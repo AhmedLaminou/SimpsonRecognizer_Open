@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters - Simpson Knower</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Springfield Background -->
+    <div class="springfield-bg">
+        <div class="clouds">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+        </div>
+        <div class="springfield-skyline"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="simpsons-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-text">SIMPSON</span>
+                <span class="logo-highlight">KNOWER</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">
+                    <span class="nav-icon">🏠</span> Home
+                </a></li>
+                <li><a href="/characters" class="nav-link active">
+                    <span class="nav-icon">👨‍👩‍👧‍👦</span> Characters
+                </a></li>
+                <li><a href="/news" class="nav-link">
+                    <span class="nav-icon">📺</span> News
+                </a></li>
+                <li><a href="/about" class="nav-link">
+                    <span class="nav-icon">🍩</span> About
+                </a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>👨‍👩‍👧‍👦 Meet The Characters</h1>
+        <p>The 10 Springfield residents our AI can identify!</p>
+    </header>
+
+    <!-- Characters Grid -->
+    <main class="characters-grid">
+        <div class="character-card">
+            <div class="char-emoji">👨‍🦲</div>
+            <h3>Homer Simpson</h3>
+            <p>The lovable, donut-obsessed patriarch of the Simpson family. Works at the Springfield Nuclear Power Plant. D'oh!</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">👦</div>
+            <h3>Bart Simpson</h3>
+            <p>The mischievous 10-year-old troublemaker. Known for his catchphrases "Eat my shorts!" and "Ay caramba!"</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">👩</div>
+            <h3>Marge Simpson</h3>
+            <p>The patient, blue-haired matriarch who holds the family together with her distinctive voice and towering hairdo.</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">👧</div>
+            <h3>Lisa Simpson</h3>
+            <p>The intelligent, saxophone-playing middle child. An environmentalist, vegetarian, and Buddhist at just 8 years old!</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">👶</div>
+            <h3>Maggie Simpson</h3>
+            <p>The silent but expressive baby of the family. Always seen with her red pacifier. Never speaks but says so much!</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">🧔</div>
+            <h3>Ned Flanders</h3>
+            <p>The Simpsons' overly friendly neighbor. Known for his religious devotion and phrases like "Hi-diddly-ho, neighborino!"</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">👴</div>
+            <h3>Mr. Burns</h3>
+            <p>The ancient, wealthy owner of the Springfield Nuclear Power Plant. "Excellent!" is his signature expression.</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">🍺</div>
+            <h3>Moe Szyslak</h3>
+            <p>The grumpy bartender at Moe's Tavern. Homer's best friend and the victim of countless Bart's prank calls.</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">🤡</div>
+            <h3>Krusty the Clown</h3>
+            <p>Springfield's beloved (but jaded) TV clown. Host of The Krusty the Clown Show and Bart's idol.</p>
+        </div>
+
+        <div class="character-card">
+            <div class="char-emoji">👨‍🏫</div>
+            <h3>Principal Skinner</h3>
+            <p>The long-suffering principal of Springfield Elementary. Constantly dealing with Bart's antics and Superintendent Chalmers.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="simpsons-footer">
+        <div class="footer-content">
+            <div class="footer-logo">SIMPSON KNOWER</div>
+            <p>Powered by TensorFlow & Deep Learning</p>
+            <p class="footer-quote">"Don't have a cow, man!" - Bart Simpson</p>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/characters">Characters</a>
+                <a href="/news">News</a>
+                <a href="/about">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
